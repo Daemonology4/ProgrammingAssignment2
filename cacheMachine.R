@@ -1,13 +1,29 @@
-makeVector <- function(x = numeric()) {
+##initial code to make an inverse of a matrix
+
+makeCacheMatrix<- function(x = matrix()) {
   m <- NULL
   set <- function(y) {
     x <<- y
     m <<- NULL
   }
   get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
+  setinv <- function(solve) m <<- inv
+  getinv <- function() m
   list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
+       setinv = setinv,
+       getinv = getinv)
+}
+
+
+#code for working with the above function to work ith inverse
+cacheSolve <- function(x, ...) {
+  m <- x$getinv()
+  if(!is.null(m)) {
+    message("getting cached data")
+    return(m)
+  }
+  data <- x$get()
+  m <- solve(data, ...)
+  x$setinv(m)
+  m
 }
