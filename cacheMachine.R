@@ -7,12 +7,15 @@
 
 makeCacheMatrix<- function(x = matrix()) {
   m <- NULL
+  #sets x to the value of it's stored inverse
   set <- function(y) {
     x <<- y
     m <<- NULL
   }
+  #gets x by being called
   get <- function() x
-  setinv <- function(solve) m <<- inv
+  #sets value of inverse
+  setinv <- function(x) m <<- solve(x)
   getinv <- function() m
   list(set = set, get = get,
        setinv = setinv,
